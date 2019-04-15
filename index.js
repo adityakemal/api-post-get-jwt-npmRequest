@@ -24,13 +24,15 @@ function createToken(){
 }
 
 
+
+
 //create jwt
 app.post('/api/login', (req,res)=>{
   if (req.body.username === user.username && req.body.password === user.password) {
     res.json({
       token :createToken()
     })
-    
+
   }else {
     res.sendStatus(400)
   }
@@ -40,9 +42,7 @@ app.get('/',jwtVerifier({secret : 'secret'}),(req,res)=>{
   var data = {
     data : req.token
   }
-  res.json({
-    message: 'aya nao iyeu meni rame',
-  })
+  res.send('aya nao iyeu meni rame')
 })
 
 // post seccuring
@@ -50,7 +50,8 @@ app.post('/testpost', jwtVerifier({secret:'secret'}), (req, res) => {
   var t = {
     test : req.body.test
   }
-console.log(t);
+  console.log(t);
+  res.send(t)
 })
 
 // error handle by express

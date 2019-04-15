@@ -46,12 +46,11 @@ client.post('/test', (req, res) => {
     auth: {
       bearer: accessToken
     },
-    form: {
-      test: 'client_credentials'
-    }
+    form
   }, function(err, response, body) {
       console.log(response);
       console.log(body);
+      res.send(body)
   });
 })
 
@@ -70,7 +69,9 @@ client.get('/home', (req, res) => {
       console.log('maybe expire');
     } else {
       console.log(body);
-      res.send(body)
+      res.json({
+        data: body,
+      })
     }
 
   })
